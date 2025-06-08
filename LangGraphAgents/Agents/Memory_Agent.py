@@ -1,7 +1,7 @@
 import os
 from typing import TypedDict, List, Union
 from langchain_core.messages import HumanMessage, AIMessage
-# from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langgraph.graph import StateGraph, START, END
 from dotenv import load_dotenv
 
@@ -10,14 +10,17 @@ load_dotenv()
 class AgentState(TypedDict):
     messages: List[Union[HumanMessage, AIMessage]]
 
-# llm = ChatOpenAI(model="gpt-4o")
-llm=""
+# Initialize Groq LLM
+llm = ChatGroq(
+    groq_api_key=os.getenv("GROQ_API_KEY"),
+    model_name="meta-llama/llama-4-scout-17b-16e-instruct"
+)
 
 def process(state: AgentState) -> AgentState:
     """This node will solve the request you input"""
     response = llm.invoke(state["messages"])
 
-    state["messages"].append(AIMessage(content=response.content)) 
+    state["messages"].append(AIMessage(content=response.content))
     print(f"\nAI: {response.content}")
     print("CURRENT STATE: ", state["messages"])
 
@@ -26,9 +29,8 @@ def process(state: AgentState) -> AgentState:
 graph = StateGraph(AgentState)
 graph.add_node("process", process)
 graph.add_edge(START, "process")
-graph.add_edge("process", END) 
+graph.add_edge("process", END)
 agent = graph.compile()
-
 
 conversation_history = []
 
@@ -39,10 +41,9 @@ while user_input != "exit":
     conversation_history = result["messages"]
     user_input = input("Enter: ")
 
-
 with open("logging.txt", "w") as file:
     file.write("Your Conversation Log:\n")
-    
+
     for message in conversation_history:
         if isinstance(message, HumanMessage):
             file.write(f"You: {message.content}\n")

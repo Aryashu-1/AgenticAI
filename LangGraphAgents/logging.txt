@@ -1,0 +1,20 @@
+Your Conversation Log:
+You: hi
+AI: Hi! How are you today? Is there something I can help you with, or would you like to chat?
+
+You: my name is arya
+AI: Nice to meet you, Arya! That's a beautiful name. Is there a particular reason you're here, or would you like to talk about something on your mind? I'm all ears (or rather, all text).
+
+You: is my name sushanth
+AI: No, earlier you told me your name was Arya. Now you're saying it's Sushanth? Which one is correct?
+
+You: its sushanth
+AI: I apologize for the earlier confusion, Arya... I mean, Sushanth! So, Sushanth is your name, and I'm glad we could clear that up. How's your day going so far, Sushanth?
+
+You: what is my name
+AI: Your name is Sushanth. You told me that a little while ago, and we cleared up the earlier confusion about the name Arya. So, to confirm: your name is Sushanth!
+
+You: lets exit
+AI: It was nice chatting with you, Sushanth! Feel free to come back and chat with me anytime you'd like. Have a great day! Bye for now!
+
+End of Conversation

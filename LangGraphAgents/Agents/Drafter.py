@@ -2,6 +2,7 @@ from typing import Annotated, Sequence, TypedDict
 from dotenv import load_dotenv  
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage, ToolMessage, SystemMessage
 # from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain_core.tools import tool
 from langgraph.graph.message import add_messages
 from langgraph.graph import StateGraph, END
@@ -51,7 +52,10 @@ def save(filename: str) -> str:
 tools = [update, save]
 
 # model = ChatOpenAI(model="gpt-4o").bind_tools(tools)
-model =""
+model =  ChatGroq(
+    groq_api_key=os.getenv("GROQ_API_KEY"),
+    model_name="meta-llama/llama-4-scout-17b-16e-instruct"
+)
 
 def our_agent(state: AgentState) -> AgentState:
     system_prompt = SystemMessage(content=f"""
